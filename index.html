@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elisa AI – Login & Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Firebase SDKs -->
+  <script defer src="/__/firebase/12.6.0/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/12.6.0/firebase-auth-compat.js"></script>
+
+  <!-- Loads your Firebase config (from Hosting) -->
+  <script defer src="/__/firebase/init.js"></script>
+
+  <!-- Your app logic -->
+  <script defer src="app.js"></script>
+</head>
+
+<body>
+  <div class="app-root">
+    <!-- Top bar with logo -->
+    <header class="top-bar">
+      <div class="top-left">
+        <img src="logo.png" alt="Elisa Logo" class="logo" />
+        <div class="brand">
+          <span class="brand-name">Elisa AI</span>
+          <span class="brand-tagline">Your personal AI assistant</span>
+        </div>
+      </div>
+      <div class="top-right">
+        <span id="user-email" class="user-email hidden"></span>
+        <button id="logout-btn" class="btn btn-ghost small hidden">Log out</button>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <!-- AUTH SECTION -->
+      <section id="auth-section" class="auth-section card glass-card">
+        <div class="auth-header">
+          <h1>Welcome back</h1>
+          <p>Log in to continue chatting with Elisa.</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button id="tab-signin" class="auth-tab active">Log in</button>
+          <button id="tab-signup" class="auth-tab">Sign up</button>
+        </div>
+
+        <form id="auth-form" class="auth-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" required placeholder="you@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input id="password" type="password" required placeholder="••••••••" />
+              <button
+                type="button"
+                id="toggle-password"
+                class="password-toggle"
+                aria-label="Show password">
+                👁
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary full-width" id="auth-submit-btn">
+            Continue
+          </button>
+
+          <div class="divider">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="btn btn-outline full-width" id="google-signin-btn">
+            Continue with Google
+          </button>
+
+          <button type="button" class="link-btn" id="forgot-password-btn">
+            Forgot password?
+          </button>
+
+          <p id="auth-error" class="error-text"></p>
+          <p id="auth-info" class="info-text"></p>
+        </form>
+      </section>
+
+      <!-- CHAT SECTION -->
+      <section id="chat-section" class="chat-section hidden">
+        <div class="chat-layout">
+          <!-- Sidebar -->
+          <aside class="sidebar glass-card">
+            <button id="new-chat-btn" class="btn btn-outline full-width">
+              + New chat
+            </button>
+
+            <div class="sidebar-section">
+              <h3>Recent chats</h3>
+              <div id="chat-list" class="chat-list">
+                <!-- chats rendered here -->
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <h3>Account</h3>
+              <p class="muted">
+                You are signed in. Your chats stay on this device and will be linked to your account in future versions.
+              </p>
+            </div>
+          </aside>
+
+          <!-- Main chat panel -->
+          <section class="chat-panel glass-card">
+            <div class="chat-header">
+              <div>
+                <h1>Elisa Chat</h1>
+              </div>
+              <div class="chat-header-controls">
+                <label class="voice-select-group">
+                  <span>Voice</span>
+                  <select id="voice-select">
+                    <option value="calm">Calm</option>
+                    <option value="sweet">Sweet</option>
+                    <option value="deep">Deep</option>
+                    <option value="fast">Fast</option>
+                    <option value="anime">Anime</option>
+                  </select>
+                </label>
+                <label class="auto-voice-toggle">
+                  <input type="checkbox" id="auto-voice-toggle" checked />
+                  Auto voice
+                </label>
+              </div>
+            </div>
+
+            <div id="chat-messages" class="chat-messages">
+              <div id="typing-indicator" class="typing hidden">
+                <div class="avatar">E</div>
+                <div class="bubble typing-bubble">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <!-- filled by JS -->
+            </div>
+
+            <form id="chat-form" class="chat-input-row">
+              <textarea
+                id="chat-input"
+                rows="1"
+                placeholder="Send a message..."
+                required></textarea>
+              <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>
